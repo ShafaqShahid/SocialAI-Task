@@ -9,8 +9,8 @@ const htmlDir = path.join(reportsDir, 'html');
 const junitPath = path.join(reportsDir, 'junit.xml');
 
 if (!fs.existsSync(jsonPath)) {
-  console.error(`Cucumber JSON report not found at ${jsonPath}`);
-  process.exit(1);
+  console.warn(`Cucumber JSON report not found at ${jsonPath}. Skipping report generation.`);
+  process.exit(0);
 }
 
 fs.mkdirSync(reportsDir, { recursive: true });
