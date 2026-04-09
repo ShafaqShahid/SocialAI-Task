@@ -1,0 +1,26 @@
+{
+  "name": "minisociali-qa-automation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright + Cucumber automation suite for the MiniSociali sample app.",
+  "scripts": {
+    "postinstall": "node scripts/install-sample-app.js",
+    "clean:reports": "node -e \"const fs=require('fs'); fs.rmSync('reports',{recursive:true,force:true});\"",
+    "pretest:cucumber": "npm run clean:reports",
+    "test:cucumber": "cucumber-js --config cucumber.js",
+    "test": "start-server-and-test \"npm --prefix sample-app start\" http://127.0.0.1:4000 \"npm run test:cucumber -- --tags \\\"not @known-bug\\\"\"",
+    "test:api": "start-server-and-test \"npm --prefix sample-app start\" http://127.0.0.1:4000 \"npm run test:cucumber -- --tags \\\"@api and not @known-bug\\\"\"",
+    "test:ui": "start-server-and-test \"npm --prefix sample-app start\" http://127.0.0.1:4000 \"npm run test:cucumber -- --tags \\\"@ui and not @known-bug\\\"\"",
+    "test:smoke": "start-server-and-test \"npm --prefix sample-app start\" http://127.0.0.1:4000 \"npm run test:cucumber -- --tags \\\"@smoke and not @known-bug\\\"\"",
+    "test:known-bugs": "start-server-and-test \"npm --prefix sample-app start\" http://127.0.0.1:4000 \"npm run test:cucumber -- --tags \\\"@known-bug\\\"\"",
+    "test:headed": "start-server-and-test \"npm --prefix sample-app start\" http://127.0.0.1:4000 \"npm run test:cucumber -- --world-parameters {\\\"headed\\\":true} --tags \\\"not @known-bug and @ui\\\"\"",
+    "test:report": "node scripts/generate-report.js"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.0.1",
+    "cucumber-junit": "^1.7.1",
+    "multiple-cucumber-html-reporter": "^3.8.0",
+    "playwright": "^1.54.1",
+    "start-server-and-test": "^2.0.8"
+  }
+}

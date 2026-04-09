@@ -1,0 +1,10 @@
+node_modules/
+*.log
+.DS_Store
+.env
+.env.local
+reports/
+playwright/.cache/
+
+# Candidate submission artifacts - uncomment if you collect candidate work inside this folder
+# submissions/
